@@ -1,0 +1,13 @@
+{% include 'navbar.html' %}
+
+<div>
+    {% for room in rooms %}
+        <div>
+            <h5>{{room.id}} : {{room.name}}</h5>
+            <hr>
+        </div>
+
+    {% endfor %}
+</div>
+
+
