@@ -1,17 +1,12 @@
 from django.shortcuts import render
 from django.http import HttpResponse 
-
+from .models import Room, Message
 
 
 # Create your views here.
 
-rooms = [
-    {'id': 5, 'name': 'Dangerous Django'},
-    {'id': 1, 'name': 'Lets learn Python'},
-    {'id': 2, 'name': 'React learning'},
-    {'id': 3, 'name': 'Django tricks for begginers'},
-    {'id': 4, 'name': 'Learn Figma Design'},
-]
+rooms = Room.objects.all()
+messages = Message.objects.all()
 
 def home(request):
     context = {'rooms':rooms}
@@ -19,10 +14,8 @@ def home(request):
 
 
 def room(request,pk):
-    room = None
-    for i in rooms:
-        if i['id'] == int(pk):
-            room = i
-    context = {'room': room}
+    room = Room.objects.get(id = pk )
+    message = Message.objects.filter(room = room)
+    context = {'room': room, 'messages':message}
     
     return render(request, 'Rooms/room.html',context)

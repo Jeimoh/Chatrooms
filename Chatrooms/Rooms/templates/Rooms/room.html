@@ -4,5 +4,26 @@
 
 
 <div>
-    <h1> {{room.id}}: {{room.name}} <small><small>working correctly</small></small></h1>
+    <div class="header">
+        <h1> {{room.name}} </h1>
+    </div>
+    <div class="messages">
+        {% if messages %}
+            {% for message in messages %}
+                 <div style="border: solid;border-radius: 25px; width: fit-content;padding: 5px;">
+                     <small>{{message.user}}</small>
+                     <br><br>
+                     {{message.body}}
+                     <br><br>
+                     <small>{{message.created}} >> updated on {{message.updated}}</small>
+                 </div>
+                 <br>
+             {% endfor %}
+        {% else %}
+                 <div style="text-align: center;">
+                    <p>no messages here</p>
+                 </div>
+        {% endif %}
+    </div>
+
 </div>
