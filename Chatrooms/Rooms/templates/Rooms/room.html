@@ -24,6 +24,8 @@
                     <p>no messages here</p>
                  </div>
         {% endif %}
+
+        <a href="{% url 'createMessage' room.id %}">Add Message</a>
     </div>
 
 </div>

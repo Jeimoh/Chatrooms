@@ -1,15 +1,19 @@
 {% include 'navbar.html' %}
 
 <div>
+    <a href="{% url 'createRoom' %}">Create Room</a>
+    <br>
     {% for room in rooms %}
         <b>{{room.id}}</b>
         <a href="{% url 'room' room.id %}">
-            <div style="width:200px; border:solid;border-radius: 25px;color: black;text-decoration: none;">
+            <div style="width:200px; border:solid;border-radius: 25px;color: black;text-decoration: none;padding: 5px;">
+                <span>@{{room.host}}</span>
                 <h2 style="text-decoration: none;">{{room.name}}</h2>
-            
+                <small>{{room.topic}}</small>
             </div>
         </a>
-            <br>
+        <a href="{% url 'updateRoom' room.id %}">Update Room</a>
+        <br>
 
     {% endfor %}
 </div>
