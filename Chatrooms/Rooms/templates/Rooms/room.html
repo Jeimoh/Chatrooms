@@ -6,18 +6,21 @@
 <div>
     <div class="header">
         <h1> {{room.name}} </h1>
+        <a href="{% url 'updateRoom' room.id %}">Edit Room</a>
     </div>
-    <div class="messages">
+    <div class="messages" ">
         {% if messages %}
             {% for message in messages %}
-                 <div style="border: solid;border-radius: 25px; width: fit-content;padding: 5px;">
-                     <small>{{message.user}}</small>
+                 <div style="border: solid;border-radius: 25px; width: fit-content;padding: 5px;background-color: rgb(7, 127, 127);">
+                     <small>@{{message.user}}</small>
                      <br><br>
-                     {{message.body}}
+                     <b>{{message.body}}</b>
                      <br><br>
                      <small>{{message.created}} >> updated on {{message.updated}}</small>
+                     <small><a href="{% url 'deleteMessage' message.id%}">delete</a></small>
                  </div>
                  <br>
+                 
              {% endfor %}
         {% else %}
                  <div style="text-align: center;">
@@ -25,7 +28,7 @@
                  </div>
         {% endif %}
 
-        <a href="{% url 'createMessage' room.id %}">Add Message</a>
+        <a href="{% url 'createMessage' room.id %}"><button style="color: black;padding: 10px;background-color: green;border-radius: 10px;"><b>Send Message</b></button></a>
     </div>
 
 </div>

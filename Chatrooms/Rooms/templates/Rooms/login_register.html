@@ -1,0 +1,12 @@
+{% include 'navbar.html' %}
+
+<div>
+    <form action="" method="post">
+        {% csrf_token %}
+        <label for="Username">Username</label>
+        <input type="text" name="UserName" placeholder="Enter Username">
+        <label for="password">Password</label>
+        <input type="password" name="Password" placeholder="Enter Password">
+        <input type="submit" value="Submit">
+    </form>
+</div>

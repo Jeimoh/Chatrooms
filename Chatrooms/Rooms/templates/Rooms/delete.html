@@ -1,0 +1,10 @@
+{% include 'navbar.html' %}
+
+<div>
+    <form action="" method="post">
+        {%csrf_token%}
+        <p>Are You sure you want to delete {{object}}</p>
+        <a href="{{ request.META.HTTP_REFERER }}">Go Back</a>
+        <input type="submit" value="Submit">
+    </form>
+</div>

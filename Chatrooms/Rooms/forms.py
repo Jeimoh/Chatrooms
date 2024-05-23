@@ -8,5 +8,5 @@ class CreateRoomForm(ModelForm):
 class CreateMessageForm(ModelForm):
     class Meta:
         model = Message
-        fields = '__all__'
+        exclude = ['room']
     

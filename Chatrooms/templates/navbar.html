@@ -9,8 +9,18 @@
 <body>
 
     <h1><a href="/">Home</a></h1>
+    <a href="{% url 'loginUser' %}">Login</a>
     <hr>
-    
+
+    {% if messages %}
+        <ul class="Messages">
+            {% for message in messages %}
+                <li>
+                    {{message}}
+                </li>
+                {% endfor %}
+        </ul>
+    {% endif %}
 </body>
 </html>
 
