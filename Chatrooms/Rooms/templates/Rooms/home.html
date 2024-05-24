@@ -1,22 +1,46 @@
 {% include 'navbar.html' %}
 
-<div>
-    <a href="{% url 'createRoom' %}"><button style="background-color: green; width: 40px;height: 40px;border-radius: 40px;border: solid;text-align: center;font-size: large;"><b>+</b></button></a>Create Room
-    <br>
-    {% for room in rooms %}
-        <b>{{room.id}}</b>
-        <a href="{% url 'room' room.id %}">
-            <div style="width:300px; border:solid;border-radius: 25px;text-decoration: none;padding: 5px;background-color: rgba(8, 145, 150, 0.8);">
-                <span>@{{room.host}}</span>
-                <h2 style="text-decoration: none;">{{room.name}}</h2>
-                <small>{{room.topic}}</small>
-                <br>
-                <a href="{% url 'updateRoom' room.id %}"><button style="background-color: rgb(5, 168, 18);border-radius: 10px;padding: 10px;"><b>Edit Room</b></button></a>
-                <a href="{% url 'deleteRoom' room.id %}"><button style="background-color: rgb(190, 6, 24);border-radius: 10px;padding: 10px;"><b>DElete Task</b></button></a>
-                <br>
+<style>
+    .mainContainer{
+        display: grid;
+        grid-template-columns: 1fr 3fr;
+    }
+</style>
+
+
+<div class="mainContainer">
+    <div class="Navigation">
+        <h3>Browse Topics</h3>
+        <hr>
+        <a href="{% url 'home' %}">All</a>
+        {% for topic in topics %}
+            <div class="specificTopic">
+            <a href="{% url 'home' %}?q={{topic.name}}">{{topic.name}}</a>
             </div>
+        {% endfor %}
 
-    {% endfor %}
+
+    </div>
+
+    <div class="chatrooms">
+        <div>
+            <a href="{% url 'createRoom' %}"><button style="background-color: green; width: 40px;height: 40px;border-radius: 40px;border: solid;text-align: center;font-size: large;"><b>+</b></button></a>Create Room
+            <br>
+            {% for room in rooms %}
+                <b>{{room.id}}</b>
+                <a href="{% url 'room' room.id %}">
+                    <div style="width:300px; border:solid;border-radius: 25px;text-decoration: none;padding: 5px;background-color: rgba(8, 145, 150, 0.8);">
+                        <span>@{{room.host}}</span>
+                        <h2 style="text-decoration: none;">{{room.name}}</h2>
+                        <small>{{room.topic}}</small>
+                        <br>
+                        <a href="{% url 'updateRoom' room.id %}"><button style="background-color: rgb(5, 168, 18);border-radius: 10px;padding: 10px;"><b>Edit Room</b></button></a>
+                        <a href="{% url 'deleteRoom' room.id %}"><button style="background-color: rgb(190, 6, 24);border-radius: 10px;padding: 10px;"><b>DElete Task</b></button></a>
+                        <br>
+                    </div>
+                
+            {% endfor %}
+        </div>
+    </div>
 </div>
-
 

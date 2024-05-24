@@ -3,34 +3,32 @@ from django.contrib import messages
 from django.http import HttpResponse 
 from django.contrib.auth import authenticate, login,logout
 from django.contrib.auth.models import User
-from .models import Room, Message
+from .models import Room, Message, Topic
 from .forms import CreateRoomForm,CreateMessageForm
 
 # Create your views here.
 
 rooms = Room.objects.all()
 messages = Message.objects.all()
-
+topics = Topic.objects.all()
 def loginUser(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
         try:
-            user = User.objects.get(username == username)
+            user = User.objects.get(username = username)
         except:
             return HttpResponse('User does not Exist')
-        
-
-        
-
 
     context = {}
     return render(request, 'Rooms/login_register.html', context)
 
 def home(request):
-    context = {'rooms':rooms}
-    return render(request,'Rooms/home.html',context)
+    q = request.GET.get('q')
+    #rooms = Room.objects.filter(topic__name == q)
 
+    context = {'rooms':rooms, "topics":topics}
+    return render(request,'Rooms/home.html',context)
 
 def room(request,pk):
     room = Room.objects.get(id = pk )
@@ -38,6 +36,7 @@ def room(request,pk):
     context = {'room': room, 'messages':message}
     
     return render(request, 'Rooms/room.html',context)
+
 def createRoom(request):
     form = CreateRoomForm()
     if request.method == 'POST':
@@ -73,6 +72,7 @@ def createMessage(request,pk):
         
     context = {'form':form}
     return render(request, 'Rooms/create.html', context)
+
 def deleteRoom(request,pk):
     room = get_object_or_404(Room,id = pk)
     if request.method == 'POST':
